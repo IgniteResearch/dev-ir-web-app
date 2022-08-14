@@ -25,14 +25,11 @@ jobs:
         npm install 
         npm run build
         echo 'igniteresearch.in' > build/CNAME
-    - name: Setup Pages
-      uses: actions/configure-pages@v1
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v1
-      with:
-        path: "build"
     - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@main
+      if: success()
+      uses: crazy-max/ghaction-github-pages@v2
+      with:
+        target_branch: gh-pages
+        build_dir: build
       env:
         GITHUB_TOKEN: ${{ secrets.SAML_GITHUB_TOKEN }}
