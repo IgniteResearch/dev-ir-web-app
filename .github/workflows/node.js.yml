@@ -24,7 +24,7 @@ jobs:
       run: |
         npm install 
         npm run build
-        echo 'igniteresearch.in' > build/CNAME
+        echo 'dev.igniteresearch.in' > build/CNAME
     - name: Deploy to GitHub Pages
       if: success()
       uses: crazy-max/ghaction-github-pages@v2
