@@ -20,6 +20,6 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: |
-        git config user.email "gsaikoushik@yahoo.com"
-        git config user.name "skgandikota"
+        git config --global  user.email "gsaikoushik@yahoo.com"
+        git config --global  user.name "skgandikota"
         npm run-script deploy
