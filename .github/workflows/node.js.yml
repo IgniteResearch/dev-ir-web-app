@@ -19,4 +19,7 @@ jobs:
         node-version: 16
         cache: 'npm'
     - run: npm ci
-    - run: npm run-script deploy
+    - run: |
+        git config user.email "gsaikoushik@yahoo.com"
+        git config user.name "skgandikota"
+        npm run-script deploy
