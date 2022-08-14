@@ -2,10 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
-
 on: [repository_dispatch]
-
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,13 +10,21 @@ jobs:
     - uses: actions/checkout@v3
       with: 
         repository: 'IgniteResearch/IgniteResearch'
-    - name: Use Node.js 16
-      uses: actions/setup-node@v3
+    - uses: actions/setup-node@v2
       with:
-        node-version: 16
-        cache: 'npm'
-    - run: npm ci
-    - run: |
-        git config --global  user.email "gsaikoushik@yahoo.com"
-        git config --global  user.name "skgandikota"
-        npm run-script deploy
+        node-version: "16"
+        cache: "npm"
+    - name: Build & Generate Static Site for prod
+      run: |
+        npm install 
+        npm run build
+        echo 'igniteresearch.in' > build/CNAME
+    - name: Setup Pages
+      uses: actions/configure-pages@v1
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: "build"
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@main
