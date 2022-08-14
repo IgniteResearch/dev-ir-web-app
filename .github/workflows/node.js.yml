@@ -34,3 +34,5 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@main
+      env:
+        GITHUB_TOKEN: ${{ secrets.SAML_GITHUB_TOKEN }}
